@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquarium Filter Calculator - GPH & Flow Rate Guide</title>
+    <meta name="description" content="Free aquarium filter calculator. Find the right GPH flow rate for your tank size, fish load, and setup type. HOB, canister, and sponge filter recommendations.">
+    <meta name="keywords" content="aquarium filter calculator, GPH calculator, filter flow rate, aquarium filtration, filter sizing">
+    <link rel="canonical" href="https://aquariumcalc.pages.dev/calculators/filter.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-cyan-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../" class="text-2xl font-bold text-blue-600">
+                    <span class="text-cyan-500">Aquarium</span>Calc
+                </a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="../" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="volume.html" class="text-gray-600 hover:text-blue-600">Volume</a>
+                    <a href="stocking.html" class="text-gray-600 hover:text-blue-600">Stocking</a>
+                    <a href="heater.html" class="text-gray-600 hover:text-blue-600">Heater</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            <!-- Page Header -->
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Aquarium Filter Calculator</h1>
+                <p class="text-xl text-gray-600">Find the right flow rate (GPH) for your tank</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Calculator Form -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Enter Your Details</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Tank Volume (gallons)</label>
+                            <input type="number" id="tankVolume" class="calc-input" placeholder="55" min="1" value="">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Tank Type</label>
+                            <select id="tankType" class="calc-select">
+                                <option value="community">Community (tetras, rasboras, livebearers)</option>
+                                <option value="planted" selected>Planted Aquarium</option>
+                                <option value="cichlid">Cichlid Tank</option>
+                                <option value="goldfish">Goldfish / Messy Fish</option>
+                                <option value="reef">Reef / Saltwater</option>
+                                <option value="betta">Betta / Low Flow</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Stocking Level</label>
+                            <select id="stockingLevel" class="calc-select">
+                                <option value="0.8">Lightly Stocked</option>
+                                <option value="1" selected>Moderately Stocked</option>
+                                <option value="1.25">Heavily Stocked</option>
+                                <option value="1.5">Overstocked (cichlids, etc.)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-medium mb-2">Preferred Filter Type</label>
+                            <select id="filterType" class="calc-select">
+                                <option value="hob">Hang-On-Back (HOB)</option>
+                                <option value="canister" selected>Canister Filter</option>
+                                <option value="sponge">Sponge Filter</option>
+                                <option value="internal">Internal Power Filter</option>
+                                <option value="sump">Sump (saltwater/large tanks)</option>
+                            </select>
+                        </div>
+
+                        <button onclick="calculateFilter()" class="calc-button">
+                            Calculate Filter Size
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div>
+                    <div id="results" class="bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Recommended Filtration</h2>
+                        <div class="text-center text-gray-500 py-12">
+                            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                            </svg>
+                            <p>Enter your tank details to get filter recommendations</p>
+                        </div>
+                    </div>
+
+                    <!-- Turnover Guide -->
+                    <div class="bg-green-50 rounded-xl p-6 mt-6">
+                        <h3 class="font-bold text-gray-800 mb-4">Tank Turnover Guidelines</h3>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <div class="flex justify-between">
+                                <span>Betta / Low Flow</span>
+                                <span>2-3x per hour</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Planted Tank</span>
+                                <span>4-5x per hour</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Community</span>
+                                <span>4-6x per hour</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Cichlids / Messy Fish</span>
+                                <span>8-10x per hour</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Reef / Marine</span>
+                                <span>10-20x per hour</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product Recommendations -->
+            <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Top Rated Aquarium Filters</h2>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Canister Filters -->
+                    <div class="border rounded-lg p-6">
+                        <div class="text-sm text-green-600 font-semibold mb-2">Best Canister</div>
+                        <h3 class="font-bold text-gray-800 mb-2">Fluval 07 Series</h3>
+                        <p class="text-gray-600 text-sm mb-4">Quiet operation, excellent media capacity, reliable priming. Industry leading canister filters.</p>
+                        <div class="space-y-2">
+                            <a href="https://www.amazon.com/Fluval-Performance-Canister-Filter-Gallons/dp/B07K3YM2DX?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-green-500 text-white py-2 rounded hover:bg-green-600 text-sm">
+                                107 - Up to 30 gal (145 GPH)
+                            </a>
+                            <a href="https://www.amazon.com/Fluval-Performance-Canister-Filter-Gallons/dp/B07K3YTJQW?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-green-500 text-white py-2 rounded hover:bg-green-600 text-sm">
+                                207 - Up to 45 gal (206 GPH)
+                            </a>
+                            <a href="https://www.amazon.com/Fluval-Performance-Canister-Filter-Gallons/dp/B07K3ZCFK8?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-green-500 text-white py-2 rounded hover:bg-green-600 text-sm">
+                                307 - Up to 70 gal (303 GPH)
+                            </a>
+                            <a href="https://www.amazon.com/Fluval-Performance-Canister-Filter-Gallons/dp/B07K41GYJF?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-green-500 text-white py-2 rounded hover:bg-green-600 text-sm">
+                                407 - Up to 100 gal (383 GPH)
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- HOB Filters -->
+                    <div class="border rounded-lg p-6">
+                        <div class="text-sm text-blue-600 font-semibold mb-2">Best HOB</div>
+                        <h3 class="font-bold text-gray-800 mb-2">AquaClear</h3>
+                        <p class="text-gray-600 text-sm mb-4">Customizable media, adjustable flow, legendary reliability. The HOB standard.</p>
+                        <div class="space-y-2">
+                            <a href="https://www.amazon.com/AquaClear-20-Power-Filter-Listed/dp/B000260FVG?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 text-sm">
+                                AquaClear 20 - 5-20 gal (100 GPH)
+                            </a>
+                            <a href="https://www.amazon.com/AquaClear-50-Power-Filter-Listed/dp/B000260FUW?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 text-sm">
+                                AquaClear 50 - 20-50 gal (200 GPH)
+                            </a>
+                            <a href="https://www.amazon.com/AquaClear-70-Power-Filter-Listed/dp/B000260FUM?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 text-sm">
+                                AquaClear 70 - 40-70 gal (300 GPH)
+                            </a>
+                            <a href="https://www.amazon.com/AquaClear-110-Power-Filter-Listed/dp/B000260FUC?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-blue-500 text-white py-2 rounded hover:bg-blue-600 text-sm">
+                                AquaClear 110 - 60-110 gal (500 GPH)
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Sponge Filters -->
+                    <div class="border rounded-lg p-6">
+                        <div class="text-sm text-purple-600 font-semibold mb-2">Best Sponge</div>
+                        <h3 class="font-bold text-gray-800 mb-2">Aquarium Co-Op</h3>
+                        <p class="text-gray-600 text-sm mb-4">Great for shrimp, fry, and low-bioload tanks. Excellent biological filtration.</p>
+                        <div class="space-y-2">
+                            <a href="https://www.amazon.com/Aquarium-Co-Op-Sponge-Filter-Small/dp/B07XQ7NDTM?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-purple-500 text-white py-2 rounded hover:bg-purple-600 text-sm">
+                                Small - 10-20 gal
+                            </a>
+                            <a href="https://www.amazon.com/Aquarium-Co-Op-Sponge-Filter-Medium/dp/B09DFMCW4Q?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-purple-500 text-white py-2 rounded hover:bg-purple-600 text-sm">
+                                Medium - 20-40 gal
+                            </a>
+                            <a href="https://www.amazon.com/Aquarium-Co-Op-Sponge-Filter-Large/dp/B07XQ7MJP7?tag=kcwd-20" target="_blank" rel="noopener" class="block text-center bg-purple-500 text-white py-2 rounded hover:bg-purple-600 text-sm">
+                                Large - 40-80 gal
+                            </a>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-2">Requires air pump (sold separately)</p>
+                    </div>
+                </div>
+
+                <p class="text-center text-sm text-gray-500 mt-6">
+                    As an Amazon Associate, we earn from qualifying purchases.
+                </p>
+            </div>
+
+            <!-- Educational Content -->
+            <div class="mt-12 bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Understanding Aquarium Filtration</h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-3">The Three Types of Filtration</h3>
+                        <div class="space-y-4 text-gray-600">
+                            <div>
+                                <strong class="text-gray-800">Mechanical:</strong> Removes particles and debris from the water.
+                                Filter floss, sponges, and pads trap waste before it decomposes.
+                            </div>
+                            <div>
+                                <strong class="text-gray-800">Biological:</strong> The most important! Beneficial bacteria convert
+                                toxic ammonia to nitrite, then to less harmful nitrate. This happens in porous media like ceramic rings and bio-balls.
+                            </div>
+                            <div>
+                                <strong class="text-gray-800">Chemical:</strong> Activated carbon removes medications, tannins,
+                                and odors. Not always necessary but useful in specific situations.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-3">Filter Type Comparison</h3>
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="text-left border-b">
+                                    <th class="py-2">Type</th>
+                                    <th class="py-2">Best For</th>
+                                    <th class="py-2">Maintenance</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-600">
+                                <tr class="border-b">
+                                    <td class="py-2">HOB</td>
+                                    <td>Small-medium tanks</td>
+                                    <td>Easy</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2">Canister</td>
+                                    <td>Medium-large tanks</td>
+                                    <td>Moderate</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2">Sponge</td>
+                                    <td>Shrimp, fry, bettas</td>
+                                    <td>Very Easy</td>
+                                </tr>
+                                <tr class="border-b">
+                                    <td class="py-2">Internal</td>
+                                    <td>Small tanks</td>
+                                    <td>Easy</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-2">Sump</td>
+                                    <td>Large/reef tanks</td>
+                                    <td>Complex</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-yellow-50 rounded-lg">
+                    <h3 class="font-bold text-gray-800 mb-2">Important: Never Replace All Filter Media at Once!</h3>
+                    <p class="text-gray-600">
+                        Your beneficial bacteria live in the filter media. Replacing everything at once can crash your nitrogen cycle
+                        and kill your fish. Only replace 1/3 of media at a time, waiting 2 weeks between changes.
+                        Never rinse media in tap water - use old tank water to preserve bacteria.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4 mt-12">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-gray-400">&copy; 2025 AquariumCalc. All calculations are estimates.</p>
+            <div class="mt-4 space-x-4">
+                <a href="../" class="text-gray-400 hover:text-white">Home</a>
+                <a href="volume.html" class="text-gray-400 hover:text-white">Volume Calculator</a>
+                <a href="stocking.html" class="text-gray-400 hover:text-white">Stocking Calculator</a>
+                <a href="heater.html" class="text-gray-400 hover:text-white">Heater Calculator</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function calculateFilter() {
+            const tankVolume = parseFloat(document.getElementById('tankVolume').value);
+            const tankType = document.getElementById('tankType').value;
+            const stockingLevel = parseFloat(document.getElementById('stockingLevel').value);
+            const filterType = document.getElementById('filterType').value;
+
+            if (!tankVolume) {
+                showError('Please enter your tank volume');
+                return;
+            }
+
+            // Base turnover rates by tank type
+            const turnoverRates = {
+                betta: { min: 2, max: 3, name: 'Betta / Low Flow' },
+                planted: { min: 4, max: 5, name: 'Planted Tank' },
+                community: { min: 4, max: 6, name: 'Community' },
+                cichlid: { min: 8, max: 10, name: 'Cichlid' },
+                goldfish: { min: 8, max: 10, name: 'Goldfish / Messy Fish' },
+                reef: { min: 10, max: 20, name: 'Reef / Marine' }
+            };
+
+            const rates = turnoverRates[tankType];
+
+            // Calculate GPH range
+            const minGPH = Math.round(tankVolume * rates.min * stockingLevel);
+            const maxGPH = Math.round(tankVolume * rates.max * stockingLevel);
+            const recommendedGPH = Math.round((minGPH + maxGPH) / 2);
+
+            // Filter type recommendations
+            const filterRecommendations = {
+                hob: getHOBRecommendation(recommendedGPH),
+                canister: getCanisterRecommendation(recommendedGPH),
+                sponge: getSpongeRecommendation(tankVolume),
+                internal: getInternalRecommendation(recommendedGPH),
+                sump: getSumpRecommendation(tankVolume)
+            };
+
+            displayResults(tankVolume, tankType, rates, minGPH, maxGPH, recommendedGPH, filterType, filterRecommendations[filterType]);
+        }
+
+        function getHOBRecommendation(gph) {
+            if (gph <= 100) return { model: 'AquaClear 20', gph: 100, size: '5-20 gal' };
+            if (gph <= 200) return { model: 'AquaClear 50', gph: 200, size: '20-50 gal' };
+            if (gph <= 300) return { model: 'AquaClear 70', gph: 300, size: '40-70 gal' };
+            if (gph <= 500) return { model: 'AquaClear 110', gph: 500, size: '60-110 gal' };
+            return { model: 'Multiple AquaClear 110s', gph: '500+ each', size: 'Large tanks' };
+        }
+
+        function getCanisterRecommendation(gph) {
+            if (gph <= 145) return { model: 'Fluval 107', gph: 145, size: 'Up to 30 gal' };
+            if (gph <= 206) return { model: 'Fluval 207', gph: 206, size: 'Up to 45 gal' };
+            if (gph <= 303) return { model: 'Fluval 307', gph: 303, size: 'Up to 70 gal' };
+            if (gph <= 383) return { model: 'Fluval 407', gph: 383, size: 'Up to 100 gal' };
+            return { model: 'Fluval FX4 or FX6', gph: '700-925', size: 'Large tanks' };
+        }
+
+        function getSpongeRecommendation(volume) {
+            if (volume <= 20) return { model: 'Small Sponge Filter', gph: 'N/A', size: '10-20 gal' };
+            if (volume <= 40) return { model: 'Medium Sponge Filter', gph: 'N/A', size: '20-40 gal' };
+            if (volume <= 80) return { model: 'Large Sponge Filter', gph: 'N/A', size: '40-80 gal' };
+            return { model: 'Multiple Large Sponges', gph: 'N/A', size: 'Large tanks' };
+        }
+
+        function getInternalRecommendation(gph) {
+            if (gph <= 90) return { model: 'Fluval U2', gph: 90, size: 'Up to 30 gal' };
+            if (gph <= 155) return { model: 'Fluval U3', gph: 155, size: 'Up to 40 gal' };
+            if (gph <= 260) return { model: 'Fluval U4', gph: 260, size: 'Up to 65 gal' };
+            return { model: 'Consider canister or HOB', gph: 'N/A', size: 'Large tanks' };
+        }
+
+        function getSumpRecommendation(volume) {
+            const sumpSize = Math.round(volume * 0.2); // 20% of display tank
+            const returnPump = Math.round(volume * 10); // 10x turnover
+            return { model: `${sumpSize}+ gallon sump with ${returnPump} GPH return`, gph: returnPump, size: 'Custom' };
+        }
+
+        function displayResults(volume, tankType, rates, minGPH, maxGPH, recommendedGPH, filterType, recommendation) {
+            const resultsDiv = document.getElementById('results');
+
+            const filterTypeNames = {
+                hob: 'Hang-On-Back',
+                canister: 'Canister',
+                sponge: 'Sponge',
+                internal: 'Internal',
+                sump: 'Sump'
+            };
+
+            resultsDiv.innerHTML = `
+                <h2 class="text-xl font-bold text-gray-800 mb-6">Your Filtration Needs</h2>
+
+                <div class="result-card">
+                    <div class="text-center p-6 bg-gradient-to-br from-green-500 to-teal-500 rounded-xl text-white mb-6">
+                        <div class="text-lg opacity-90">Recommended Flow Rate</div>
+                        <div class="text-5xl font-bold my-2">${recommendedGPH}</div>
+                        <div class="text-lg opacity-90">GPH (Gallons Per Hour)</div>
+                    </div>
+
+                    <div class="space-y-3 mb-6">
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">Tank Volume</span>
+                            <span class="font-semibold">${volume} gallons</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">Tank Type</span>
+                            <span class="font-semibold">${rates.name}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b">
+                            <span class="text-gray-600">Turnover Rate</span>
+                            <span class="font-semibold">${rates.min}-${rates.max}x per hour</span>
+                        </div>
+                        <div class="flex justify-between py-2 bg-green-50 px-3 rounded-lg">
+                            <span class="text-gray-800 font-medium">GPH Range</span>
+                            <span class="font-bold text-green-600">${minGPH} - ${maxGPH} GPH</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 rounded-lg p-4 mb-6">
+                        <h3 class="font-bold text-gray-800 mb-2">${filterTypeNames[filterType]} Recommendation</h3>
+                        <div class="text-lg font-semibold text-green-600 mb-1">${recommendation.model}</div>
+                        <div class="text-sm text-gray-600">
+                            ${recommendation.gph !== 'N/A' ? `Flow: ${recommendation.gph} GPH | ` : ''}
+                            Size: ${recommendation.size}
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <p class="text-blue-800 text-sm">
+                            <strong>Pro tip:</strong> It's better to have more filtration than you need.
+                            You can always reduce flow, but you can't increase capacity without upgrading.
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <h2 class="text-xl font-bold text-gray-800 mb-6">Recommended Filtration</h2>
+                <div class="danger-box">
+                    <p class="font-medium text-red-800">${message}</p>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

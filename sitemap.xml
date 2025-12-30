@@ -30,4 +30,40 @@
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://aquariumcalc.pages.dev/blog/</loc>
+        <lastmod>2025-12-29</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://aquariumcalc.pages.dev/blog/nitrogen-cycle-guide.html</loc>
+        <lastmod>2025-12-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://aquariumcalc.pages.dev/blog/best-fish-10-gallon-tank.html</loc>
+        <lastmod>2025-12-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://aquariumcalc.pages.dev/blog/betta-tank-size.html</loc>
+        <lastmod>2025-12-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://aquariumcalc.pages.dev/blog/aquarium-heater-size-guide.html</loc>
+        <lastmod>2025-12-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://aquariumcalc.pages.dev/blog/canister-vs-hob-filter.html</loc>
+        <lastmod>2025-12-29</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
 </urlset>

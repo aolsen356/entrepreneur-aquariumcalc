@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquarium Calculator - Tank Volume, Stocking & Equipment Sizing</title>
+    <meta name="description" content="Free aquarium calculators for tank volume, fish stocking levels, heater sizing, and filter requirements. Plan your perfect freshwater or saltwater setup.">
+    <link rel="canonical" href="https://aquariumcalc.pages.dev/">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-cyan-50 min-h-screen">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="/" class="text-2xl font-bold text-blue-600"><span class="text-cyan-500">Aquarium</span>Calc</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="#calculators" class="text-gray-600 hover:text-blue-600">Calculators</a>
+                    <a href="#guide" class="text-gray-600 hover:text-blue-600">Setup Guide</a>
+                    <a href="#products" class="text-gray-600 hover:text-blue-600">Recommended Gear</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Plan Your Perfect Aquarium</h1>
+            <p class="text-xl text-gray-600 mb-8">Free calculators for tank volume, fish stocking levels, heater sizing, and filter requirements.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="calculators/volume.html" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700">Calculate Tank Volume</a>
+                <a href="calculators/stocking.html" class="bg-cyan-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-cyan-600">Check Stocking Levels</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="bg-blue-600 py-8 px-4">
+        <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center text-white">
+            <div><div class="text-3xl font-bold">4</div><div class="text-blue-200">Free Calculators</div></div>
+            <div><div class="text-3xl font-bold">150+</div><div class="text-blue-200">Fish Species</div></div>
+            <div><div class="text-3xl font-bold">100%</div><div class="text-blue-200">Free Forever</div></div>
+            <div><div class="text-3xl font-bold">0</div><div class="text-blue-200">Data Collected</div></div>
+        </div>
+    </section>
+
+    <section id="calculators" class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Aquarium Calculators</h2>
+            <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">Everything you need to plan and maintain a healthy aquarium.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <a href="calculators/volume.html" class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-blue-100 rounded-lg flex items-center justify-center mb-4"><span class="text-3xl">📦</span></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Tank Volume Calculator</h3>
+                    <p class="text-gray-600 mb-4">Calculate exact water volume for rectangular, bow-front, cylindrical, and hexagonal tanks.</p>
+                    <span class="text-blue-600 font-semibold">Calculate Volume →</span>
+                </a>
+                <a href="calculators/stocking.html" class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-cyan-100 rounded-lg flex items-center justify-center mb-4"><span class="text-3xl">🐠</span></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Fish Stocking Calculator</h3>
+                    <p class="text-gray-600 mb-4">Check if your fish selection is appropriate for your tank size based on bioload.</p>
+                    <span class="text-cyan-600 font-semibold">Check Stocking →</span>
+                </a>
+                <a href="calculators/heater.html" class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-orange-100 rounded-lg flex items-center justify-center mb-4"><span class="text-3xl">🌡️</span></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Heater Size Calculator</h3>
+                    <p class="text-gray-600 mb-4">Determine the right wattage heater based on tank volume and room temperature.</p>
+                    <span class="text-orange-600 font-semibold">Size Your Heater →</span>
+                </a>
+                <a href="calculators/filter.html" class="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition">
+                    <div class="w-16 h-16 bg-green-100 rounded-lg flex items-center justify-center mb-4"><span class="text-3xl">🔄</span></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Filter GPH Calculator</h3>
+                    <p class="text-gray-600 mb-4">Calculate the minimum filter flow rate (GPH) for your tank type and stocking level.</p>
+                    <span class="text-green-600 font-semibold">Calculate Flow →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="guide" class="py-16 px-4 bg-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Aquarium Setup Checklist</h2>
+            <div class="space-y-6">
+                <div class="flex items-start gap-4 p-6 bg-blue-50 rounded-xl">
+                    <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                    <div><h3 class="font-bold text-gray-800">Choose Your Tank Size</h3><p class="text-gray-600">Bigger is usually better - larger tanks are more stable and forgiving.</p></div>
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-cyan-50 rounded-xl">
+                    <div class="w-8 h-8 bg-cyan-600 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                    <div><h3 class="font-bold text-gray-800">Plan Your Fish Selection</h3><p class="text-gray-600">Research fish compatibility and adult sizes before buying.</p></div>
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-orange-50 rounded-xl">
+                    <div class="w-8 h-8 bg-orange-600 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                    <div><h3 class="font-bold text-gray-800">Size Your Equipment</h3><p class="text-gray-600">Heaters and filters must be properly sized for your tank.</p></div>
+                </div>
+                <div class="flex items-start gap-4 p-6 bg-green-50 rounded-xl">
+                    <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">4</div>
+                    <div><h3 class="font-bold text-gray-800">Cycle Your Tank</h3><p class="text-gray-600">The nitrogen cycle takes 4-6 weeks. Never add fish to an uncycled tank.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products" class="py-16 px-4">
+        <div class="max-w-6xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Recommended Aquarium Gear</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="text-sm text-green-600 font-semibold mb-1">Best Canister Filter</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Fluval 307</h3>
+                    <p class="text-gray-600 text-sm mb-4">303 GPH. Perfect for 40-70 gallon tanks.</p>
+                    <a href="https://www.amazon.com/Fluval-Performance-Canister-Filter-Gallons/dp/B07K3ZCFK8?tag=kcwd-20" target="_blank" class="block text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Check Price</a>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="text-sm text-orange-600 font-semibold mb-1">Best Heater</div>
+                    <h3 class="font-bold text-gray-800 mb-2">Fluval E300</h3>
+                    <p class="text-gray-600 text-sm mb-4">300W with LCD display. For up to 100 gallons.</p>
+                    <a href="https://www.amazon.com/Fluval-E300-Advanced-Electronic-Heater/dp/B003TLF1DW?tag=kcwd-20" target="_blank" class="block text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Check Price</a>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <div class="text-sm text-purple-600 font-semibold mb-1">Essential Testing</div>
+                    <h3 class="font-bold text-gray-800 mb-2">API Master Test Kit</h3>
+                    <p class="text-gray-600 text-sm mb-4">Tests pH, ammonia, nitrite, nitrate. 800+ tests.</p>
+                    <a href="https://www.amazon.com/API-FRESHWATER-800-Test-Freshwater-Aquarium/dp/B000255NCI?tag=kcwd-20" target="_blank" class="block text-center bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700">Check Price</a>
+                </div>
+            </div>
+            <p class="text-center text-sm text-gray-500 mt-8">As an Amazon Associate, we earn from qualifying purchases.</p>
+        </div>
+    </section>
+
+    <footer class="bg-gray-800 text-white py-12 px-4">
+        <div class="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+            <div><h3 class="text-xl font-bold mb-4"><span class="text-cyan-400">Aquarium</span>Calc</h3><p class="text-gray-400">Free calculators for aquarium planning.</p></div>
+            <div><h4 class="font-bold mb-4">Calculators</h4><ul class="space-y-2 text-gray-400"><li><a href="calculators/volume.html" class="hover:text-white">Tank Volume</a></li><li><a href="calculators/stocking.html" class="hover:text-white">Fish Stocking</a></li><li><a href="calculators/heater.html" class="hover:text-white">Heater Sizing</a></li><li><a href="calculators/filter.html" class="hover:text-white">Filter GPH</a></li></ul></div>
+            <div><h4 class="font-bold mb-4">Resources</h4><ul class="space-y-2 text-gray-400"><li><a href="#guide" class="hover:text-white">Setup Guide</a></li><li><a href="#products" class="hover:text-white">Recommended Gear</a></li></ul></div>
+        </div>
+        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400"><p>&copy; 2025 AquariumCalc.</p></div>
+    </footer>
+</body>
+</html>

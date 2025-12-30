@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquarium Volume Calculator - Calculate Tank Water Capacity</title>
+    <meta name="description" content="Free aquarium volume calculator for rectangular, bow-front, cylindrical, and hexagonal tanks. Get exact water volume in gallons or liters.">
+    <link rel="canonical" href="https://aquariumcalc.pages.dev/calculators/volume.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-cyan-50 min-h-screen">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../" class="text-2xl font-bold text-blue-600"><span class="text-cyan-500">Aquarium</span>Calc</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="../" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="stocking.html" class="text-gray-600 hover:text-blue-600">Stocking</a>
+                    <a href="heater.html" class="text-gray-600 hover:text-blue-600">Heater</a>
+                    <a href="filter.html" class="text-gray-600 hover:text-blue-600">Filter</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-12 px-4">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Aquarium Volume Calculator</h1>
+                <p class="text-xl text-gray-600">Calculate exact water volume for any tank shape</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h2 class="text-xl font-bold text-gray-800 mb-6">Enter Tank Dimensions</h2>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Tank Shape</label>
+                        <select id="tankShape" class="calc-select" onchange="updateFormFields()">
+                            <option value="rectangular">Rectangular / Standard</option>
+                            <option value="bowfront">Bow-Front</option>
+                            <option value="cylinder">Cylinder / Column</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Unit</label>
+                        <select id="unit" class="calc-select">
+                            <option value="inches">Inches (US Gallons)</option>
+                            <option value="cm">Centimeters (Liters)</option>
+                        </select>
+                    </div>
+                    <div id="rectFields">
+                        <div class="grid grid-cols-3 gap-4 mb-6">
+                            <div><label class="block text-gray-700 font-medium mb-2">Length</label><input type="number" id="length" class="calc-input" placeholder="36"></div>
+                            <div><label class="block text-gray-700 font-medium mb-2">Width</label><input type="number" id="width" class="calc-input" placeholder="18"></div>
+                            <div><label class="block text-gray-700 font-medium mb-2">Height</label><input type="number" id="height" class="calc-input" placeholder="24"></div>
+                        </div>
+                    </div>
+                    <div id="cylinderFields" class="hidden">
+                        <div class="grid grid-cols-2 gap-4 mb-6">
+                            <div><label class="block text-gray-700 font-medium mb-2">Diameter</label><input type="number" id="diameter" class="calc-input" placeholder="18"></div>
+                            <div><label class="block text-gray-700 font-medium mb-2">Height</label><input type="number" id="cylHeight" class="calc-input" placeholder="24"></div>
+                        </div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-medium mb-2">Substrate Depth (optional)</label>
+                        <input type="number" id="substrate" class="calc-input" placeholder="2" value="0">
+                    </div>
+                    <div class="mb-8">
+                        <label class="block text-gray-700 font-medium mb-2">Decoration Displacement</label>
+                        <select id="decorations" class="calc-select">
+                            <option value="0">None</option>
+                            <option value="5">Light (5%)</option>
+                            <option value="10" selected>Moderate (10%)</option>
+                            <option value="15">Heavy (15%)</option>
+                        </select>
+                    </div>
+                    <button onclick="calculateVolume()" class="calc-button">Calculate Volume</button>
+                </div>
+                <div>
+                    <div id="results" class="bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Results</h2>
+                        <div class="text-center text-gray-500 py-12"><p>Enter dimensions to calculate</p></div>
+                    </div>
+                    <div class="bg-blue-50 rounded-xl p-6 mt-6">
+                        <h3 class="font-bold text-gray-800 mb-4">Common Tank Sizes</h3>
+                        <div class="text-sm text-gray-600 space-y-2">
+                            <div class="flex justify-between"><span>10 gallon</span><span>20" x 10" x 12"</span></div>
+                            <div class="flex justify-between"><span>20 gallon long</span><span>30" x 12" x 12"</span></div>
+                            <div class="flex justify-between"><span>55 gallon</span><span>48" x 13" x 21"</span></div>
+                            <div class="flex justify-between"><span>75 gallon</span><span>48" x 18" x 21"</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 px-4 mt-12">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-gray-400">&copy; 2025 AquariumCalc</p>
+        </div>
+    </footer>
+
+    <script>
+        function updateFormFields() {
+            const shape = document.getElementById('tankShape').value;
+            document.getElementById('rectFields').classList.toggle('hidden', shape === 'cylinder');
+            document.getElementById('cylinderFields').classList.toggle('hidden', shape !== 'cylinder');
+        }
+        function calculateVolume() {
+            const shape = document.getElementById('tankShape').value;
+            const unit = document.getElementById('unit').value;
+            const substrate = parseFloat(document.getElementById('substrate').value) || 0;
+            const decoPercent = parseFloat(document.getElementById('decorations').value) || 0;
+            let volume = 0;
+            if (shape === 'cylinder') {
+                const d = parseFloat(document.getElementById('diameter').value);
+                const h = parseFloat(document.getElementById('cylHeight').value) - substrate;
+                volume = Math.PI * (d/2) * (d/2) * h;
+            } else {
+                const l = parseFloat(document.getElementById('length').value);
+                const w = parseFloat(document.getElementById('width').value);
+                const h = parseFloat(document.getElementById('height').value) - substrate;
+                volume = l * w * h;
+                if (shape === 'bowfront') volume *= 1.1;
+            }
+            volume *= (1 - decoPercent/100);
+            const gallons = unit === 'inches' ? volume / 231 : volume / 3785.41;
+            const liters = unit === 'inches' ? gallons * 3.78541 : volume / 1000;
+            document.getElementById('results').innerHTML = `
+                <h2 class="text-xl font-bold text-gray-800 mb-6">Your Tank Volume</h2>
+                <div class="text-center p-6 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl text-white mb-6">
+                    <div class="text-5xl font-bold">${gallons.toFixed(1)}</div>
+                    <div class="text-xl">US Gallons</div>
+                    <div class="text-lg opacity-75 mt-2">${liters.toFixed(1)} Liters</div>
+                </div>
+                <div class="space-y-3">
+                    <a href="stocking.html?volume=${gallons.toFixed(1)}" class="block text-center bg-cyan-500 text-white py-3 rounded-lg font-semibold hover:bg-cyan-600">Check Fish Stocking →</a>
+                    <a href="heater.html?volume=${gallons.toFixed(1)}" class="block text-center bg-orange-500 text-white py-3 rounded-lg font-semibold hover:bg-orange-600">Calculate Heater Size →</a>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

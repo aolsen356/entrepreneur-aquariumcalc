@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fish Stocking Calculator - Aquarium Bioload & Compatibility</title>
+    <meta name="description" content="Free aquarium stocking calculator. Check fish compatibility, bioload levels, and get stocking recommendations for your tank size.">
+    <link rel="canonical" href="https://aquariumcalc.pages.dev/calculators/stocking.html">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-cyan-50 min-h-screen">
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="max-w-6xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../" class="text-2xl font-bold text-blue-600"><span class="text-cyan-500">Aquarium</span>Calc</a>
+                <div class="hidden md:flex space-x-6">
+                    <a href="../" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="volume.html" class="text-gray-600 hover:text-blue-600">Volume</a>
+                    <a href="heater.html" class="text-gray-600 hover:text-blue-600">Heater</a>
+                    <a href="filter.html" class="text-gray-600 hover:text-blue-600">Filter</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="py-12 px-4">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Fish Stocking Calculator</h1>
+                <p class="text-xl text-gray-600">Check if your fish selection is appropriate for your tank</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Tank Setup</h2>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div><label class="block text-gray-700 font-medium mb-2">Tank Volume (gallons)</label><input type="number" id="tankVolume" class="calc-input" placeholder="55"></div>
+                            <div><label class="block text-gray-700 font-medium mb-2">Filtration</label>
+                                <select id="filtration" class="calc-select">
+                                    <option value="1">Standard (4x)</option>
+                                    <option value="1.25" selected>Good (6x)</option>
+                                    <option value="1.5">Excellent (8x+)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-6">Add Fish</h2>
+                        <div class="grid md:grid-cols-3 gap-4 mb-6">
+                            <div class="md:col-span-2">
+                                <select id="fishSpecies" class="calc-select">
+                                    <optgroup label="Community"><option value="neon_tetra|0.5|1">Neon Tetra (1")</option><option value="guppy|0.7|1.5">Guppy (1.5")</option><option value="platy|1|2">Platy (2")</option><option value="molly|1.5|3">Molly (3")</option><option value="corydoras|1|2">Corydoras (2")</option></optgroup>
+                                    <optgroup label="Larger"><option value="angelfish|4|6">Angelfish (6")</option><option value="gourami|2|4">Gourami (4")</option><option value="pleco|2.5|4">Bristlenose Pleco (4")</option></optgroup>
+                                    <optgroup label="Cichlids"><option value="ram|1.5|2.5">German Blue Ram (2.5")</option><option value="kribensis|2|4">Kribensis (4")</option></optgroup>
+                                    <optgroup label="Goldfish"><option value="fancy|8|8">Fancy Goldfish (8")</option><option value="comet|12|12">Comet Goldfish (12")</option></optgroup>
+                                </select>
+                            </div>
+                            <div><input type="number" id="fishQuantity" class="calc-input" value="6" min="1" placeholder="Qty"></div>
+                        </div>
+                        <button onclick="addFish()" class="bg-cyan-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-cyan-600">+ Add to Tank</button>
+                    </div>
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-xl font-bold text-gray-800">Your Fish</h2>
+                            <button onclick="clearFish()" class="reset-button text-sm">Clear All</button>
+                        </div>
+                        <div id="fishList" class="border rounded-lg divide-y"><div class="p-6 text-center text-gray-500">No fish added yet</div></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="bg-white rounded-xl shadow-lg p-6 sticky top-24">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Stocking Level</h2>
+                        <div id="stockingResults">
+                            <div class="text-center py-8">
+                                <div class="stocking-meter mb-4"><div class="stocking-fill understocked" style="width: 0%"></div></div>
+                                <p class="text-gray-500">Add fish to see stocking level</p>
+                            </div>
+                        </div>
+                        <div class="mt-6 pt-6 border-t">
+                            <h3 class="font-bold text-gray-800 mb-3">Tips</h3>
+                            <ul class="text-sm text-gray-600 space-y-2">
+                                <li>School fish need 6+ of their kind</li>
+                                <li>Add fish slowly over weeks</li>
+                                <li>Research compatibility first</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 px-4 mt-12">
+        <div class="max-w-6xl mx-auto text-center"><p class="text-gray-400">&copy; 2025 AquariumCalc</p></div>
+    </footer>
+
+    <script>
+        let fish = [];
+        function getUrlParam(p) { return new URLSearchParams(window.location.search).get(p); }
+        document.addEventListener('DOMContentLoaded', () => { const v = getUrlParam('volume'); if(v) document.getElementById('tankVolume').value = v; });
+        function addFish() {
+            const [id, bioload, size] = document.getElementById('fishSpecies').value.split('|');
+            const name = document.getElementById('fishSpecies').options[document.getElementById('fishSpecies').selectedIndex].text;
+            const qty = parseInt(document.getElementById('fishQuantity').value) || 1;
+            const existing = fish.findIndex(f => f.id === id);
+            if (existing >= 0) fish[existing].qty += qty;
+            else fish.push({ id, name, bioload: parseFloat(bioload), size: parseFloat(size), qty });
+            updateDisplay();
+        }
+        function removeFish(i) { fish.splice(i, 1); updateDisplay(); }
+        function clearFish() { fish = []; updateDisplay(); }
+        function updateDisplay() {
+            const list = document.getElementById('fishList');
+            if (fish.length === 0) { list.innerHTML = '<div class="p-6 text-center text-gray-500">No fish added yet</div>'; updateStocking(); return; }
+            list.innerHTML = fish.map((f, i) => `
+                <div class="fish-item">
+                    <div><div class="font-semibold">${f.name}</div><div class="text-sm text-gray-500">${f.size}" size | Bioload: ${(f.bioload * f.qty).toFixed(1)}</div></div>
+                    <div class="flex items-center gap-2">
+                        <span class="font-semibold">${f.qty}</span>
+                        <button onclick="removeFish(${i})" class="text-red-500 hover:text-red-700">✕</button>
+                    </div>
+                </div>
+            `).join('');
+            updateStocking();
+        }
+        function updateStocking() {
+            const volume = parseFloat(document.getElementById('tankVolume').value) || 0;
+            const filtration = parseFloat(document.getElementById('filtration').value);
+            if (volume === 0 || fish.length === 0) {
+                document.getElementById('stockingResults').innerHTML = '<div class="text-center py-8"><div class="stocking-meter mb-4"><div class="stocking-fill understocked" style="width: 0%"></div></div><p class="text-gray-500">Add tank size and fish</p></div>';
+                return;
+            }
+            const totalBioload = fish.reduce((sum, f) => sum + f.bioload * f.qty, 0);
+            const capacity = volume * filtration;
+            const percent = (totalBioload / capacity) * 100;
+            let status, statusClass, fillClass;
+            if (percent < 75) { status = 'Well Stocked'; statusClass = 'text-green-600'; fillClass = 'understocked'; }
+            else if (percent < 100) { status = 'Optimal'; statusClass = 'text-blue-600'; fillClass = 'optimal'; }
+            else if (percent < 120) { status = 'Heavy'; statusClass = 'text-yellow-600'; fillClass = 'moderate'; }
+            else { status = 'Overstocked'; statusClass = 'text-red-600'; fillClass = 'overstocked'; }
+            document.getElementById('stockingResults').innerHTML = `
+                <div class="text-center mb-4">
+                    <div class="text-4xl font-bold ${statusClass}">${Math.round(percent)}%</div>
+                    <div class="text-lg font-semibold ${statusClass}">${status}</div>
+                </div>
+                <div class="stocking-meter mb-4"><div class="stocking-fill ${fillClass}" style="width: ${Math.min(100, percent)}%"></div></div>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="bg-gray-50 p-3 rounded"><div class="text-gray-500">Total Fish</div><div class="font-bold">${fish.reduce((s,f)=>s+f.qty,0)}</div></div>
+                    <div class="bg-gray-50 p-3 rounded"><div class="text-gray-500">Bioload</div><div class="font-bold">${totalBioload.toFixed(1)}</div></div>
+                </div>
+            `;
+        }
+        document.getElementById('tankVolume').addEventListener('input', updateStocking);
+        document.getElementById('filtration').addEventListener('change', updateStocking);
+    </script>
+</body>
+</html>

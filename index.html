@@ -6,8 +6,74 @@
     <title>Aquarium Calculator - Tank Volume, Stocking & Equipment Sizing</title>
     <meta name="description" content="Free aquarium calculators for tank volume, fish stocking levels, heater sizing, and filter requirements. Plan your perfect freshwater or saltwater setup.">
     <link rel="canonical" href="https://aquariumcalc.pages.dev/">
+    <meta property="og:title" content="Aquarium Calculator - Tank Volume, Stocking & Equipment Sizing">
+    <meta property="og:description" content="Free aquarium calculators for tank volume, fish stocking levels, heater sizing, and filter requirements. Plan your perfect freshwater or saltwater setup.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aquariumcalc.pages.dev/">
+    <meta property="og:site_name" content="AquariumCalc">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Aquarium Calculator - Tank Volume, Stocking & Equipment Sizing">
+    <meta name="twitter:description" content="Free aquarium calculators for tank volume, fish stocking levels, heater sizing, and filter requirements.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AquariumCalc",
+        "url": "https://aquariumcalc.pages.dev/",
+        "description": "Free aquarium calculators for tank volume, fish stocking levels, heater sizing, and filter requirements.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://aquariumcalc.pages.dev/blog/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I calculate aquarium volume?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For rectangular tanks: multiply length x width x height in inches, then divide by 231 to get gallons. For example, a 24x12x16 inch tank = 24 x 12 x 16 / 231 = 20 gallons. Our calculator handles rectangular, bow-front, cylindrical, and hexagonal tanks automatically."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How many fish can I put in my aquarium?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The old '1 inch of fish per gallon' rule is outdated. Modern stocking calculations consider fish bioload (waste production), swimming needs, and temperament. Generally, aim for 50-75% of maximum bioload capacity to leave room for error and biological stability."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What size heater do I need for my aquarium?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "The general rule is 3-5 watts per gallon. A 20-gallon tank needs a 75-100 watt heater. In cold rooms (below 65F), use 5 watts per gallon. In warm rooms (70F+), 3 watts per gallon is sufficient. Always use a heater with adjustable thermostat."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I calculate filter GPH for my aquarium?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Your filter should turn over the tank volume 4-6 times per hour for freshwater, 6-10 times for saltwater. A 50-gallon freshwater tank needs 200-300 GPH minimum. For heavily stocked tanks or messy fish, aim for 8-10x turnover rate."
+                }
+            }
+        ]
+    }
+    </script>
 </head>
 <body class="bg-gradient-to-br from-blue-50 to-cyan-50 min-h-screen">
     <header class="bg-white shadow-sm sticky top-0 z-50">
